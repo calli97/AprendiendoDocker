@@ -1,0 +1,12 @@
+version: "3"
+services:
+    api:
+        container_name: "api"
+        build: ./api/
+        ports:
+            - "3001:3001"
+        environment:
+            - DB_USER=postgrescaca
+            - DB_PASSWORD=admin
+            - DB_HOST=localhost
+            - INIT_ID=264

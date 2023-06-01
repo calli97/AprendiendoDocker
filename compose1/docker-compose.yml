@@ -1,12 +1,17 @@
-version: "3"
+version: '2'
 services:
-    api:
-        container_name: "api"
-        build: ./api/
-        ports:
-            - "3001:3001"
-        environment:
-            - DB_USER=postgrescaca
-            - DB_PASSWORD=admin
-            - DB_HOST=localhost
-            - INIT_ID=264
+  node-compose:
+    container_name: node-compose
+    build: ./node-compose/
+    command: npm start
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://todoapp@postgres/todos
+  postgres:
+    image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_USER: todoapp
+      POSTGRES_DB: todos
